@@ -25,19 +25,29 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+- its purpose is to play a guessing game
+- 1. "too high" and "too low" were interchanged
+  2. I can't play again after I win, it doesn't reset
+  3. It accepts inputs out of range
+  4. score is sometimes a negative value
+
+- 1. I interchanged  "too high" and "too low" in app.py (claude did) line 32-47
+   2. I made claude check whether the input is in the correct range and return an appropriate text to the user line 14 - 29
+   3. Capped the final score to 0. line 50-65
+   4. reset "playing" after winning line 134-140
+
 
 ## 📸 Demo Walkthrough
 
 Describe your fixed game in numbered steps so a reader can follow along without watching a video:
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+1. secret number: 38
+2. enter 5
+3. returns "go higher"
+4. enter 50
+5. returns "go lower"
+6. I enter 38
+7. returns "you won" and it gives me the score.
 
 **Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
 
@@ -45,8 +55,25 @@ Describe your fixed game in numbered steps so a reader can follow along without 
 
 ```
 # Paste your pytest output here, e.g.:
-# pytest tests/
-# ========================= X passed in 0.XXs =========================
+                                                                                                      
+tests/test_game_logic.py::test_winning_guess PASSED                                                                     [  6%]
+tests/test_game_logic.py::test_guess_too_high_outcome PASSED                                                            [ 12%]
+tests/test_game_logic.py::test_guess_too_low_outcome PASSED                                                             [ 18%]
+tests/test_game_logic.py::test_too_high_hint_says_go_lower PASSED                                                       [ 25%]
+tests/test_game_logic.py::test_too_low_hint_says_go_higher PASSED                                                       [ 31%]
+tests/test_game_logic.py::test_string_secret_does_not_flip_result PASSED                                                [ 37%]
+tests/test_game_logic.py::test_wrong_guess_does_not_go_below_zero PASSED                                                [ 43%]
+tests/test_game_logic.py::test_repeated_wrong_guesses_stay_at_zero PASSED                                               [ 50%]
+tests/test_game_logic.py::test_wrong_guess_deducts_when_score_is_positive PASSED                                        [ 56%]
+tests/test_game_logic.py::test_win_adds_points PASSED                                                                   [ 62%]
+tests/test_game_logic.py::test_in_range_guess_is_accepted PASSED                                                        [ 68%]
+tests/test_game_logic.py::test_guess_above_range_is_rejected PASSED                                                     [ 75%]
+tests/test_game_logic.py::test_guess_below_range_is_rejected PASSED                                                     [ 81%]
+tests/test_game_logic.py::test_non_number_is_rejected PASSED                                                            [ 87%]
+tests/test_game_logic.py::test_new_game_state_resets_status_to_playing PASSED                                           [ 93%]
+tests/test_game_logic.py::test_new_game_state_resets_counters PASSED  
+
+16 passed in 0.01s ======================================================
 ```
 
 ## 🚀 Stretch Features
